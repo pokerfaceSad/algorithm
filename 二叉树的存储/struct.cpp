@@ -82,7 +82,7 @@ void bfs(Node* root,vector<int>& output){
 */
 
 
-*/ 
+
 void dfs(Node *node,vector<int>& output){
 	
 	if(node->left != NULL) dfs(node->left,output);
