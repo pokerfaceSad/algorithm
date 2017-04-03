@@ -1,32 +1,34 @@
 #include<iostream>
 #include<list>
-#include<vector>
 #define dataType int
 using namespace std;
 
+const int maxn = 100;
+dataType output[maxn];
+
 int num = 0; 
 
-void permutation(int prefixIndex,list<dataType> l,vector<dataType> output) 
+void permutation(int prefixIndex,list<dataType> l,dataType output[],int location) 
 {
 	if(prefixIndex!=-1) 
 	{
 		list<dataType>::iterator it = l.begin();
 		advance(it,prefixIndex);
-		output.push_back(*it);
+		output[location] = *it;
 		l.erase(it);
 	}
 	if(l.empty())
 	{
-		for(vector<dataType>::iterator it = output.begin();it!=output.end();it++)
+		for(int i=0;i<=location;i++)
 		{
-			cout << *it << " ";
+			cout << output[i] << " "; 
 		}
-		num++;
 		cout << endl;
+		num++;
 	}else{
 		for(int i=0;i<l.size();i++)
 		{
-			permutation(i,l,output);
+			permutation(i,l,output,location+1);
 		}
 		
 	}
@@ -36,17 +38,7 @@ int main(){
 	l.push_back(1);
 	l.push_back(2);
 	l.push_back(3);
-	l.push_back(4);
-	l.push_back(5);
-	l.push_back(6);
-	l.push_back(7);
-	l.push_back(8);
-	l.push_back(9);
-	l.push_back(10);
-	l.push_back(11);
-	l.push_back(12);
-	vector<dataType> output;
-	permutation(-1,l,output);
+	permutation(-1,l,output,-1);
 	cout << "NUM : " << num << endl; 
 	return 0;
 } 
