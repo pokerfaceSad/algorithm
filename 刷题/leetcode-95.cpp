@@ -40,6 +40,7 @@ public:
     }
 
     vector<TreeNode*> generateTrees(int n) {
+        if(n == 0) return {};
         vector<TreeNode*> ret = generate(1, n);
         return ret;
     }
