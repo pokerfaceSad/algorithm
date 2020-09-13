@@ -23,8 +23,37 @@ public:
             }
             else k = next[k];
         }
+
+        for (int i = 0 ; i < size ; i++) {
+            cout << next[i] << " ";
+        }
+        cout << endl;
         return next;
     }
+    
+
+    int* getNext_v2(string str) {
+        int size = str.size();
+        int* next = new int[size];
+        next[0] = -1;
+        // idx为待计算的next数组元素下标
+        // k为idx前面的子串的最大公共前后缀长度
+        int idx = 0, k = -1;
+        for (idx = 1 ; idx < size; idx++) {
+            while (k != -1 && str[idx-1] != str[k])
+                k = next[k];
+            next[idx] = k + 1;
+            k = k + 1;
+        }
+
+        for (int i = 0 ; i < size ; i++) {
+            cout << next[i] << " ";
+        }
+        cout << endl;
+
+        return next;
+    }
+
     int strStr(string haystack, string needle) {
         int pat_size = needle.size();
         int str_size = haystack.size();
@@ -66,8 +95,10 @@ public:
 
 int main() {
     string str2 = "";
-    string str1 = "ab";
+    string str1 = "ababab";
     Solution s;
-    cout << s.strStr(str1, str2) << endl;
+    // cout << s.strStr(str1, str2) << endl;
+    s.getNext(str1);
+    s.getNext_v2(str1);
     return 0;
 }

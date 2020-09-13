@@ -21,11 +21,11 @@ public:
                 if (index != 0) s[index++] = ' ';
                 int start=index;
                 while (ptr < size && s[ptr] != ' ') s[index++] = s[ptr++];
-                reverse(s.begin() + start, s.begin() + index);
+                reverse(s.begin() + start, s.begin() + index); // Reverses the order of the elements in the range [first,last)
             }
         }
         if (index < size)
-            s.erase(s.begin() + index, s.end());
+            s.erase(s.begin() + index, s.end()); // Removes the characters in the range [first,last) from this string.
         return s;
     }
     // 借助stack
