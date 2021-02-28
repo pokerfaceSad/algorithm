@@ -1,6 +1,7 @@
 # include <stdio.h>
 
 // 双指针
+// 两个指针一个在头 一个在尾 向中间移动直至交汇
 void reverseString(char* s, int sSize){
     int p_front = 0;
     int p_end = sSize-1;
@@ -15,6 +16,7 @@ void reverseString(char* s, int sSize){
 }
 
 // 递归
+// 首尾字符交换 递归继续处理中间剩下的size-2个字符
 void reverseString_v2(char* s, int sSize){
 
     if (sSize <= 1) {
