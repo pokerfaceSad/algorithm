@@ -22,28 +22,22 @@ struct ListNode {
 class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* dummy = new ListNode(0, head);
         ListNode* fast_cur = head;
-        ListNode* slow_cur = head;
-        // 由于要删除，所以多减一个1
-        while (n-1-1 > 0) {
+        // slow_cur->next指向要删除的节点
+        ListNode* slow_cur = dummy;
+        while (n > 0) {
             fast_cur = fast_cur->next;
             n--;
         }
-        while (fast_cur->next != NULL) {
+        while (fast_cur != NULL) {
             fast_cur = fast_cur->next;
             slow_cur = slow_cur->next;
         }
-        if (slow_cur != head) {
-            ListNode* del = slow_cur->next;
-            slow_cur->next = del->next;
-            delete del;
-            return head;
-        } else {
-            ListNode* res = slow_cur->next;
-            delete head;
-            return res;
-        }
-        
+        slow_cur->next = slow_cur->next->next;
+        ListNode* res = dummy->next;
+        delete dummy;
+        return res;
     }
 };
 
@@ -61,7 +55,11 @@ int main() {
         cur = cur->next;
     }
     Solution s;
-    ListNode* res = s.removeNthFromEnd(node1, 2);
-    cout << res->val << endl;
+    ListNode* res = s.removeNthFromEnd(node1, 1);
+    cur = res;
+    while (cur != NULL) {
+        cout << cur->val << endl;
+        cur = cur->next;
+}
     return 0;
 }
