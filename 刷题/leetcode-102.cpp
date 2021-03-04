@@ -25,39 +25,60 @@ struct TreeNode {
 class Solution {
 public:
     vector<vector<int>> levelOrder(TreeNode* root) {
-        if (!root) return {};
-        queue<TreeNode*> q1, q2;
+        if (root == NULL) return {};
+        queue<TreeNode*> q;
         vector<vector<int>> res;
-        bool isQ1 = true;
-        TreeNode* cur;
-        q1.push(root);
         vector<int> current_level;
-        while (!q1.empty() || !q2.empty()) {
-            if (isQ1) {
-                cur = q1.front(); q1.pop();
+        TreeNode* cur;
+        q.push(root);
+        int level_node_num;
+        while (!q.empty()) {
+            level_node_num = q.size();
+            current_level.clear();
+            while(level_node_num > 0) {
+                cur = q.front(); q.pop(); level_node_num--;
                 current_level.push_back(cur->val);
-                if (cur->left != NULL) q2.push(cur->left);
-                if (cur->right != NULL) q2.push(cur->right);
-                if (q1.empty()) {
-                    res.push_back(current_level);
-                    isQ1 = !isQ1;
-                    current_level.clear();
-                }
-            } else {
-                cur = q2.front(); q2.pop();
-                current_level.push_back(cur->val);
-                if (cur->left != NULL) q1.push(cur->left);
-                if (cur->right != NULL) q1.push(cur->right);
-                if (q2.empty()) {
-                    res.push_back(current_level);
-                    isQ1 = !isQ1;
-                    current_level.clear();
-                }
+                if (cur->left) q.push(cur->left);
+                if (cur->right) q.push(cur->right);
             }
-
+            res.push_back(current_level);
         }
         return res;
     }
+    // vector<vector<int>> levelOrder(TreeNode* root) {
+    //     if (!root) return {};
+    //     queue<TreeNode*> q1, q2;
+    //     vector<vector<int>> res;
+    //     bool isQ1 = true;
+    //     TreeNode* cur;
+    //     q1.push(root);
+    //     vector<int> current_level;
+    //     while (!q1.empty() || !q2.empty()) {
+    //         if (isQ1) {
+    //             cur = q1.front(); q1.pop();
+    //             current_level.push_back(cur->val);
+    //             if (cur->left != NULL) q2.push(cur->left);
+    //             if (cur->right != NULL) q2.push(cur->right);
+    //             if (q1.empty()) {
+    //                 res.push_back(current_level);
+    //                 isQ1 = !isQ1;
+    //                 current_level.clear();
+    //             }
+    //         } else {
+    //             cur = q2.front(); q2.pop();
+    //             current_level.push_back(cur->val);
+    //             if (cur->left != NULL) q1.push(cur->left);
+    //             if (cur->right != NULL) q1.push(cur->right);
+    //             if (q2.empty()) {
+    //                 res.push_back(current_level);
+    //                 isQ1 = !isQ1;
+    //                 current_level.clear();
+    //             }
+    //         }
+
+    //     }
+    //     return res;
+    // }
 };
 
 int main() {
