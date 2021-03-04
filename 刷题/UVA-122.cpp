@@ -9,24 +9,24 @@ using namespace std;
  * @file main.cpp
  * @brief 
  * UVa122
- * ¶ş²æÊ÷µÄ¹¹½¨¼°±éÀú£¨BFS£©
+ * äºŒå‰æ ‘çš„æ„å»ºåŠéå†ï¼ˆBFSï¼‰
  */
 
 
 struct Node{
     
-    int value; //Êı¾İ
-    Node *left,*right; //×Ó½Úµã
-    bool has_value; //´æ´¢¸³Öµ×´Ì¬
+    int value; //æ•°æ®
+    Node *left,*right; //å­èŠ‚ç‚¹
+    bool has_value; //å­˜å‚¨èµ‹å€¼çŠ¶æ€
     Node(): left(NULL),right(NULL),has_value(false){}
 };
 
-Node *root; //¶ş²æÊ÷µÄ¸ù½Úµã
-Node* newNode() {   return new Node();  } //newÔËËã·ûÉêÇëµÄ¿Õ¼äÔÚ¶ÑÖĞ£¬²»»áÔÚ·½·¨½áÊøºó±»»ØÊÕ 
+Node *root; //äºŒå‰æ ‘çš„æ ¹èŠ‚ç‚¹
+Node* newNode() {   return new Node();  } //newè¿ç®—ç¬¦ç”³è¯·çš„ç©ºé—´åœ¨å †ä¸­ï¼Œä¸ä¼šåœ¨æ–¹æ³•ç»“æŸåè¢«å›æ”¶ 
 /**
- * @brief ¿í¶ÈÓÅÏÈËÑË÷
+ * @brief å®½åº¦ä¼˜å…ˆæœç´¢
  * @param root
- * @param result ½«ËÑË÷½á¹û°´Ë³Ğò´æÈë¸ÃÊı×é
+ * @param result å°†æœç´¢ç»“æœæŒ‰é¡ºåºå­˜å…¥è¯¥æ•°ç»„
  */
 bool bfs(Node *root,vector<int>& result){
     queue<Node*> q;
@@ -34,10 +34,10 @@ bool bfs(Node *root,vector<int>& result){
     Node* node;
     while(!q.empty())
     {
-        node = q.front(); //È¡³ö¶ÓÊ×ÔªËØ
+        node = q.front(); //å–å‡ºé˜Ÿé¦–å…ƒç´ 
         q.pop();
         if(!node->has_value) return false;
-        if(node->left!=NULL) q.push(node->left); //½«´Ë½ÚµãµÄ×óÓÒ×ÓÒÀ´Î¼ÓÈë¶ÓÁĞ
+        if(node->left!=NULL) q.push(node->left); //å°†æ­¤èŠ‚ç‚¹çš„å·¦å³å­ä¾æ¬¡åŠ å…¥é˜Ÿåˆ—
         if(node->right!=NULL) q.push(node->right);
         result.push_back(node->value);
     }
@@ -50,23 +50,23 @@ int main(){
     bool isReadEnd = false;
     while(true)
     {         
-        bool error = false; //±êÖ¾±äÁ¿£ºÊı¾İÊäÈëÊÇ·ñÓĞ´íÎó
+        bool error = false; //æ ‡å¿—å˜é‡ï¼šæ•°æ®è¾“å…¥æ˜¯å¦æœ‰é”™è¯¯
         root = newNode();
-        //¶ÁÈ¡Ò»¿ÃÊ÷µÄ½ÚµãĞÅÏ¢
+        //è¯»å–ä¸€æ£µæ ‘çš„èŠ‚ç‚¹ä¿¡æ¯
         while(true)
         {   
             if(! (cin >> nodeMsg) ) 
             {
-                isReadEnd = true; //Èô¶ÁÈ¡½áÊøÔòÌø³ö
+                isReadEnd = true; //è‹¥è¯»å–ç»“æŸåˆ™è·³å‡º
                 break;
             }
-            if(!strcmp(nodeMsg,"()")) break; //ÈôÕâ¿ÅÊ÷µÄĞÅÏ¢ÒÑ¾­¶ÁÈ¡Íê±ÏÔòÌø³ö
-            //½âÎö×Ö·û´®
+            if(!strcmp(nodeMsg,"()")) break; //è‹¥è¿™é¢—æ ‘çš„ä¿¡æ¯å·²ç»è¯»å–å®Œæ¯•åˆ™è·³å‡º
+            //è§£æå­—ç¬¦ä¸²
             int value;
             Node *node = root;
-            sscanf(nodeMsg+1,"%d",&value); //»ñÈ¡¸Ã½ÚµãµÄvalue
+            sscanf(nodeMsg+1,"%d",&value); //è·å–è¯¥èŠ‚ç‚¹çš„value
             char *p = strchr(nodeMsg,',');
-            //½âÎö¸Ã½ÚµãÔÚÊ÷ÖĞµÄÎ»ÖÃ
+            //è§£æè¯¥èŠ‚ç‚¹åœ¨æ ‘ä¸­çš„ä½ç½®
             for(int i=1;i<strlen(p);i++)
             {
                 if(*(p+i) == 'L')
