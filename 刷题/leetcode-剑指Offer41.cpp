@@ -37,9 +37,5 @@ public:
  */
 
 int main() {
-    MedianFinder m;
-    m.addNum(1);
-    m.addNum(2);
-    find
     return 0;
 }
