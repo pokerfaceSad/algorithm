@@ -2,4 +2,5 @@
 2. 将数字分解成多个数的和，如何分解积最大？尽量分解出更多的3
 3. 摩尔投票法求数组中的众数（超过一半）
 4. `istringstream`和`ostringstream`可用于处理字符串的频繁操作，`# include <sstream>`
+5. 旋转左移或右移数组或字符串可以采用三次旋转的方法实现，`# include <algorithm> reverse()`
 
