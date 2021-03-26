@@ -1,6 +1,6 @@
 /*
 	http://www.pokerfacesad.cn/myblog/c/UVA10305%E5%9B%BEDFS%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F
-	UVA10305	ÍØÆËÅÅĞò 
+	UVA10305	æ‹“æ‰‘æ’åº 
 */
 #include<iostream> 
 #include<cstring>
@@ -11,8 +11,8 @@ using namespace std;
 const int maxn = 105;
 
 struct Net{
-	int matrix[maxn][maxn];  //ÁÚ½Ó¾ØÕó 
-	int state[maxn];	//´æ´¢½ÚµãËù´¦×´Ì¬ 
+	int matrix[maxn][maxn];  //é‚»æ¥çŸ©é˜µ 
+	int state[maxn];	//å­˜å‚¨èŠ‚ç‚¹æ‰€å¤„çŠ¶æ€ 
 	int size;
 	stack<int> rank;
 	Net(){}
@@ -20,10 +20,10 @@ struct Net{
 
 Net* net = new Net();
 
-//½ÓÊÜÒ»×éÊäÈë¹¹ÔìÒ»¸öÓĞÏòÎŞÈ¨Í¼
+//æ¥å—ä¸€ç»„è¾“å…¥æ„é€ ä¸€ä¸ªæœ‰å‘æ— æƒå›¾
 bool getInput(){
 	int m,n;
-	//³õÊ¼»¯¾ØÕó 
+	//åˆå§‹åŒ–çŸ©é˜µ 
 	memset(net->matrix,0,sizeof(net->matrix)); 
 	memset(net->state,0,sizeof(net->state));
 	 
@@ -35,44 +35,44 @@ bool getInput(){
 		for(int i=0;i<n;i++) 
 		{
 			scanf("%d%d",&from,&to);
-			net->matrix[from-1][to-1] = 1; //£¡£¡£¡×¢ÒâÊı×éÔªËØÓëÊµ¼Ê¶ÔÓ¦¹ØÏµ 
+			net->matrix[from-1][to-1] = 1; //ï¼ï¼ï¼æ³¨æ„æ•°ç»„å…ƒç´ ä¸å®é™…å¯¹åº”å…³ç³» 
 		}
 		 
 		return true;		
 	}
 	
-	//ÈôÎ´¶ÁÈ¡µ½m,nËµÃ÷ÊäÈë½áÊø 
+	//è‹¥æœªè¯»å–åˆ°m,nè¯´æ˜è¾“å…¥ç»“æŸ 
 	return false;
 } 
 
 //dfs
 bool dfs(int node){
 	
-	net->state[node] = -1; //ÕıÔÚÌ½Ë÷	
+	net->state[node] = -1; //æ­£åœ¨æ¢ç´¢	
 	for(int i=0;i<net->size;i++)
 	{
 		if(net->matrix[node][i] == 1 && net->state[i] != 1)
 		{
-			if(net->state[i] == -1) return false; //Èô¸ÃµãÒ²Õı´¦ÓÚµİ¹éÕ»Ö¡ÖĞËµÃ÷²úÉúÁËÓĞÏò»·£¬ÎŞ½â
+			if(net->state[i] == -1) return false; //è‹¥è¯¥ç‚¹ä¹Ÿæ­£å¤„äºé€’å½’æ ˆå¸§ä¸­è¯´æ˜äº§ç”Ÿäº†æœ‰å‘ç¯ï¼Œæ— è§£
 			else if(!dfs(i)) return false; 
 		}
 	}
 	
-	//½«´Ë½ÚµãÈëÕ»
+	//å°†æ­¤èŠ‚ç‚¹å…¥æ ˆ
 	net->state[node] = 1; 
 	net->rank.push(node); 
 	return true;
 } 
-//ÍØÆËÅÅĞò 
+//æ‹“æ‰‘æ’åº 
 void topoSort(){
 	
 	int flag = false;
 	for(int i=0;i<net->size;i++)
 	{
-		if(net->state[i] == 0){ //Èô¸Ãµã»¹Î´²ÎÓëÅÅĞòÔò½øĞĞdfsÌ½Ë÷ÅÅĞò 
+		if(net->state[i] == 0){ //è‹¥è¯¥ç‚¹è¿˜æœªå‚ä¸æ’åºåˆ™è¿›è¡Œdfsæ¢ç´¢æ’åº 
 			if(!dfs(i)) 
 			{
-				flag = true; //´æÔÚÓĞÏò»·£¬ÅÅĞòÊ§°Ü 
+				flag = true; //å­˜åœ¨æœ‰å‘ç¯ï¼Œæ’åºå¤±è´¥ 
 				break;
 			}
 		}

@@ -1,13 +1,13 @@
 /*
-	µÏ½ÜË¹ÌØÀ­Ëã·¨Çó×î¶ÌÂ· 
+	è¿ªæ°æ–¯ç‰¹æ‹‰ç®—æ³•æ±‚æœ€çŸ­è·¯ 
 	
-	½«½Úµã·ÖÎªÕÒµ½×î¶ÌÂ·£¨visited£©ºÍÎ´ÕÒµ½×î¶ÌÂ·£¨unvisited£©Á½¸ö¼¯ºÏ
-	lengthÊı×é´æ´¢¸÷µã¾àÀë³ö·¢µãµÄ¾àÀë 
-	while(ÖÕµã½øÈëunvisited¼¯ºÏ)
+	å°†èŠ‚ç‚¹åˆ†ä¸ºæ‰¾åˆ°æœ€çŸ­è·¯ï¼ˆvisitedï¼‰å’Œæœªæ‰¾åˆ°æœ€çŸ­è·¯ï¼ˆunvisitedï¼‰ä¸¤ä¸ªé›†åˆ
+	lengthæ•°ç»„å­˜å‚¨å„ç‚¹è·ç¦»å‡ºå‘ç‚¹çš„è·ç¦» 
+	while(ç»ˆç‚¹è¿›å…¥unvisitedé›†åˆ)
 	{ 
-		µ±Ç°½ÚµãÎªÊ×½Úµã 
-		´Óµ±Ç°½Úµã¿ªÊ¼¶ÔÍ¼½øĞĞÌ½Ë÷£¬ÕÒ³öµ±Ç°½ÚµãËùÓĞµÄ¿É´ï½Úµã£¬¶Ôµ±Ç°½ÚµãËùÓĞ¿É´ï½ÚµãµÄlength½øĞĞËÉ³Ú²Ù×÷
-		ÕÒ³öunvisitedÖĞlength×î¶ÌµÄ½Úµã¼ÓÈëvisited£¬²¢½«¸Ã½ÚµãÉèÎªµ±Ç°½Úµã 
+		å½“å‰èŠ‚ç‚¹ä¸ºé¦–èŠ‚ç‚¹ 
+		ä»å½“å‰èŠ‚ç‚¹å¼€å§‹å¯¹å›¾è¿›è¡Œæ¢ç´¢ï¼Œæ‰¾å‡ºå½“å‰èŠ‚ç‚¹æ‰€æœ‰çš„å¯è¾¾èŠ‚ç‚¹ï¼Œå¯¹å½“å‰èŠ‚ç‚¹æ‰€æœ‰å¯è¾¾èŠ‚ç‚¹çš„lengthè¿›è¡Œæ¾å¼›æ“ä½œ
+		æ‰¾å‡ºunvisitedä¸­lengthæœ€çŸ­çš„èŠ‚ç‚¹åŠ å…¥visitedï¼Œå¹¶å°†è¯¥èŠ‚ç‚¹è®¾ä¸ºå½“å‰èŠ‚ç‚¹ 
 	}
 
 */
@@ -17,19 +17,19 @@
 #include<set>
 using namespace std;
 
-const int maxn = 5; //½Úµã¹æÄ£ 
-const int INF = 10000; //¶¨ÒåÎŞÇî´ó 
+const int maxn = 5; //èŠ‚ç‚¹è§„æ¨¡ 
+const int INF = 10000; //å®šä¹‰æ— ç©·å¤§ 
 
 int net[maxn][maxn] =  {0,2,1,0,0,
 						2,0,0,1,2,
 						1,0,0,0,1,
 						0,1,0,0,1,
-						0,2,1,1,0}; //ÁÚ½Ó¾ØÕó 
+						0,2,1,1,0}; //é‚»æ¥çŸ©é˜µ 
 
-set<int> visited;	//ÒÑ¾­Ì½·ÃµÄµã 
-set<int> unvisited; //Î´Ì½·ÃµÄµã 
-int length[maxn]; //½Úµãµ½³õÊ¼µãµÄ¾àÀë 
-int fatherNode[maxn]; //¸¸½Úµã¼¯ºÏ 
+set<int> visited;	//å·²ç»æ¢è®¿çš„ç‚¹ 
+set<int> unvisited; //æœªæ¢è®¿çš„ç‚¹ 
+int length[maxn]; //èŠ‚ç‚¹åˆ°åˆå§‹ç‚¹çš„è·ç¦» 
+int fatherNode[maxn]; //çˆ¶èŠ‚ç‚¹é›†åˆ 
 
 void initArray(int array[],int value)
 {
@@ -38,7 +38,7 @@ void initArray(int array[],int value)
 }
 
 
-//»ñÈ¡µ±Ç°½ÚµãµÄ¿É´ï½Úµã 
+//è·å–å½“å‰èŠ‚ç‚¹çš„å¯è¾¾èŠ‚ç‚¹ 
 void getReachableNode(int node,vector<int> &reachableNode){
 	reachableNode.clear();
 	
@@ -47,7 +47,7 @@ void getReachableNode(int node,vector<int> &reachableNode){
 		if(net[node][i] != 0)	reachableNode.push_back(i);
 	}
 }
-//¶Ôlength½øĞĞËÉ³Ú²Ù×÷
+//å¯¹lengthè¿›è¡Œæ¾å¼›æ“ä½œ
 void relaxationOperate(int node,vector<int> reachableNode){
 
 	for(vector<int>::iterator it = reachableNode.begin();it != reachableNode.end();it++)	
@@ -55,12 +55,12 @@ void relaxationOperate(int node,vector<int> reachableNode){
 		if(length[*it] > length[node] + net[node][*it])	
 		{
 			length[*it] = length[node] + net[node][*it];
-			fatherNode[*it] = node; //¸üĞÂ¸¸½Úµã¼¯ºÏ	
+			fatherNode[*it] = node; //æ›´æ–°çˆ¶èŠ‚ç‚¹é›†åˆ	
 		}
 		
 	}	
 }
-//»ñÈ¡Î´Ñ°·Ã½ÚµãÖĞ¾àÀë×î¶ÌµÄ½Úµã
+//è·å–æœªå¯»è®¿èŠ‚ç‚¹ä¸­è·ç¦»æœ€çŸ­çš„èŠ‚ç‚¹
 int getNearestNode(){
 
 	int nearestNode = *(unvisited.begin());
@@ -85,12 +85,12 @@ void dijkstra(int start){
 	
 	unvisited.erase(unvisited.find(node));
 	visited.insert(node);
-	length[node] = 0; //£¡£¡£¡×¢Òâ£¡£¡£¡ÈôÃ»ÓĞ½«³ö·¢µãµÄlenghÉèÎª0Ôò½«Ó°ÏìËÉ³Ú²Ù×÷ 
+	length[node] = 0; //ï¼ï¼ï¼æ³¨æ„ï¼ï¼ï¼è‹¥æ²¡æœ‰å°†å‡ºå‘ç‚¹çš„lenghè®¾ä¸º0åˆ™å°†å½±å“æ¾å¼›æ“ä½œ 
 	
 	vector<int> reachableNode;
 	int nearestNode;
-	 //µ±Ç°Ëã·¨ÊÇ´Ó³ö·¢µã¿ªÊ¼Öğ²½±éÀúÕû¸öÍ¼£¬¼´ÕÒµ½³ö·¢µãµ½ËùÓĞ½ÚµãµÄ×î¶ÌÂ·¾¶ 
-	 //ÈôÊÇÒªÕÒµ½ÖÕµã¾ÍÍ£Ö¹£¬Ôò½«Ìø³öÑ­»·Ìõ¼şÉèÎªÖÕµã½øÈëvisited¼¯ºÏ 
+	 //å½“å‰ç®—æ³•æ˜¯ä»å‡ºå‘ç‚¹å¼€å§‹é€æ­¥éå†æ•´ä¸ªå›¾ï¼Œå³æ‰¾åˆ°å‡ºå‘ç‚¹åˆ°æ‰€æœ‰èŠ‚ç‚¹çš„æœ€çŸ­è·¯å¾„ 
+	 //è‹¥æ˜¯è¦æ‰¾åˆ°ç»ˆç‚¹å°±åœæ­¢ï¼Œåˆ™å°†è·³å‡ºå¾ªç¯æ¡ä»¶è®¾ä¸ºç»ˆç‚¹è¿›å…¥visitedé›†åˆ 
 	while(!unvisited.empty())
 	{
 		getReachableNode(node,reachableNode);

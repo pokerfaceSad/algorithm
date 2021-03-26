@@ -1,5 +1,5 @@
 /*
-	Í¼bfsÇó×î¶ÌÂ· 
+	å›¾bfsæ±‚æœ€çŸ­è·¯ 
 */ 
 #include<iostream>
 #include<queue>
@@ -7,26 +7,26 @@
 #include<cstring>
 using namespace std;
 
-const int maxn = 5; //½Úµã¹æÄ£ 
+const int maxn = 5; //èŠ‚ç‚¹è§„æ¨¡ 
 
 int net[maxn][maxn] =  {0,2,1,0,0,
 						2,0,0,1,2,
 						1,0,0,0,1,
 						0,1,0,0,1,
-						0,2,1,1,0}; //ÁÚ½Ó¾ØÕó 
+						0,2,1,1,0}; //é‚»æ¥çŸ©é˜µ 
 					   
-int fatherNode[maxn]; //´æ´¢Éú³ÉµÄbfsÊ÷ 
-int length[maxn]; //¸÷½Úµãµ½³õÊ¼µãµÄ¾àÀë 
+int fatherNode[maxn]; //å­˜å‚¨ç”Ÿæˆçš„bfsæ ‘ 
+int length[maxn]; //å„èŠ‚ç‚¹åˆ°åˆå§‹ç‚¹çš„è·ç¦» 
 
-queue<int> q; //¿ØÖÆbfsµÄ¶ÓÁĞ 
+queue<int> q; //æ§åˆ¶bfsçš„é˜Ÿåˆ— 
 
-//³õÊ¼»¯Êı×é 
+//åˆå§‹åŒ–æ•°ç»„ 
 void init(int array[],int value){
 	for(int i=0;i<maxn;i++)
 		array[i] = value;
 }
 
-//Ñ°ÕÒnodeµÄ¿É´ï½Úµã¼¯ºÏ 
+//å¯»æ‰¾nodeçš„å¯è¾¾èŠ‚ç‚¹é›†åˆ 
 void getSonNode(int node,vector<int> &sonNodes){
 	sonNodes.clear();
 	for(int i=0;i<maxn;i++)	
@@ -36,7 +36,7 @@ void getSonNode(int node,vector<int> &sonNodes){
 	} 
 }
 
-//±éÀúÏàÁÚ½Úµã¼¯ºÏ£¬¸üĞÂlength 
+//éå†ç›¸é‚»èŠ‚ç‚¹é›†åˆï¼Œæ›´æ–°length 
 void updateLength(int Node,vector<int> sonNodes){
 		
 	for(vector<int>::iterator it=sonNodes.begin();it!=sonNodes.end();it++)
@@ -44,7 +44,7 @@ void updateLength(int Node,vector<int> sonNodes){
 		if(length[*it] > length[Node] + net[Node][*it])
 		{
 			length[*it] = length[Node] + net[Node][*it];
-			q.push(*it); //×Ó½ÚµãÈë¶Ó 
+			q.push(*it); //å­èŠ‚ç‚¹å…¥é˜Ÿ 
 			fatherNode[*it] = Node;
 		}
 	}
@@ -70,7 +70,7 @@ int main(){
 		
 	} 
 	
-	//Êä³ö¸¸½Úµã¼¯ºÏ 
+	//è¾“å‡ºçˆ¶èŠ‚ç‚¹é›†åˆ 
 	for(int i=0;i<maxn;i++)		
 		cout << fatherNode[i] << "  ";
 	
