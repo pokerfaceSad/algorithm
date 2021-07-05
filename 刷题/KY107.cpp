@@ -9,11 +9,11 @@ using namespace std;
 const int maxn = 105;
 const int maxm = 500;
 int N, M; // N个城市 M条道路
-const int inf = INT_MAX/10;
+const int inf = INT_MAX;
 int net[maxn][maxn];
 set<int> visited;
 set<int> unvisted;
-int length[maxn];
+long long length[maxn];
 
 void getReachableNodes(int node, vector<int>& reachableNodes) {
     reachableNodes.clear();
@@ -40,6 +40,10 @@ int getNearestNode() {
     return NearestNode;
 }
 
+void init() {
+    for (int i = 0 ; i < maxn; i++) length[i] = INT_MAX;
+}
+
 int main() {
     
     cin >> N >> M;
@@ -59,7 +63,7 @@ int main() {
     // }
     int node = 0;
     // 初始化length中的值为无穷大
-    memset(length, inf, sizeof(length));
+    init();
     for (int i = 0 ; i < N ; i++) {
         unvisted.insert(i);
     }
@@ -79,7 +83,8 @@ int main() {
         visited.insert(nearestNode);
         node = nearestNode;
     }
-    cout << length[N-1] << endl;
+    for (int i = 1 ; i < N ; i++) {
+        cout << length[i] % 100000 << endl;
+    }
     return 0;
 }
-

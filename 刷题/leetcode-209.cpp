@@ -17,8 +17,7 @@ public:
                         if (slow == fast) return 1;
                         sum -= nums[slow];
                         slow++;
-                    }
-                    else {
+                    } else {
                         minLength = fast - slow + 1 < minLength ? fast - slow + 1 : minLength;
                         break;
                     }
