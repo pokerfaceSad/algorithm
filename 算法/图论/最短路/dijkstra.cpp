@@ -104,6 +104,8 @@ void dijkstra(int start){
 	
 	for(int i=0;i<maxn;i++)
 		cout << fatherNode[i] << "  ";
+	for(int i=0;i<maxn;i++)
+		cout << length[i] << "  ";
 }
 
 int main(){
