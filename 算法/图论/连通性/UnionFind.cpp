@@ -17,7 +17,7 @@ int pre[maxn];
 int find(int node){
 	int root = node; 
 	while(pre[root] != root)
-		root = pre[root];			
+		root = pre[root];
 	
 
 	//路径压缩 将此节点以上所有节点都挂在此连通块的根节点上  加快下次查询速度 
@@ -57,6 +57,7 @@ int main()
 	rootNodeSet.clear();
 	for(int i=0;i<maxn;i++) 
 	{
+		cout << "root " << i << ":" << find(i) << endl;
 		rootNodeSet.insert(find(i)); 
 	}
 	
